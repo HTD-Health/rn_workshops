@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // https://expo.github.io/vector-icons/
 
@@ -45,18 +46,26 @@ export default class App extends React.Component {
     return `${item.id}`;
   };
 
+  onEditItem = (id) => {
+    console.log(`Edit ${id}`);
+  };
+
+  onRemoveItem = (id) => {
+    console.log(`Remove ${id}`);
+  };
+
   renderItem = ({item}) => {
     return (
       <View style={styles.weightRow}>
         <Text style={styles.weightValue}>{item.value}</Text>
         <Text style={styles.weightDate}>{item.date}</Text>
 
-        <View style={styles.iconWrapper}>
+        <TouchableOpacity onPress={() => this.onEditItem(item.id)} style={styles.iconWrapper}>
           <Ionicons name="md-create" size={16} color="gray" />
-        </View>
-        <View style={[styles.iconWrapper, styles.closeIcon]}>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => this.onRemoveItem(item.id)} style={[styles.iconWrapper, styles.closeIcon]}>
           <Ionicons name="md-close" size={16} color="gray" />
-        </View>
+        </TouchableOpacity>
       </View>
     )
   };
