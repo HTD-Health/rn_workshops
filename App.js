@@ -50,6 +50,7 @@ export default class App extends React.Component {
       <View style={styles.weightRow}>
         <Text style={styles.weightValue}>{item.value}</Text>
         <Text style={styles.weightDate}>{item.date}</Text>
+
         <View style={styles.iconWrapper}>
           <Ionicons name="md-create" size={16} color="gray" />
         </View>
