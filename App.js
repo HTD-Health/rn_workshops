@@ -6,10 +6,10 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // https://expo.github.io/vector-icons/
 
 import Input from './components/Input'
 import Button from './components/Button'
+import WeightRow from './components/WeightRow'
 
 export default class App extends React.Component {
   constructor(props){
@@ -56,44 +56,41 @@ export default class App extends React.Component {
 
   renderItem = ({item}) => {
     return (
-      <View style={styles.weightRow}>
-        <Text style={styles.weightValue}>{item.value}</Text>
-        <Text style={styles.weightDate}>{item.date}</Text>
-
-        <TouchableOpacity onPress={() => this.onEditItem(item.id)} style={styles.iconWrapper}>
-          <Ionicons name="md-create" size={16} color="gray" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.onRemoveItem(item.id)} style={[styles.iconWrapper, styles.closeIcon]}>
-          <Ionicons name="md-close" size={16} color="gray" />
-        </TouchableOpacity>
-      </View>
+      <WeightRow
+        value={item.value}
+        date={item.date}
+        onEdit={() => this.onEditItem(item.id)}
+        onRemove={() => this.onRemoveItem(item.id)}
+      />
     )
   };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Input
-          onChangeText={this.onChangeBMI}
-          label="BMI"
-          keyboardType="numeric"
-          value={this.state.BMI}
-          placeholder="Placeholder"
-        />
-
-        <View style={styles.listContainer}>
-          <FlatList
-            data={this.state.weights}
-            renderItem={this.renderItem}
-            keyExtractor={this.keyExtractor}
+      <View style={styles.mainView}>
+        <View style={styles.container}>
+          <Input
+            onChangeText={this.onChangeBMI}
+            label="BMI"
+            keyboardType="numeric"
+            value={this.state.BMI}
+            placeholder="Placeholder"
           />
 
-        </View>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={this.state.weights}
+              renderItem={this.renderItem}
+              keyExtractor={this.keyExtractor}
+            />
 
-        <Button
-          onPress={this.onPressButton}
-          text="ADD WEIGHT"
-        />
+          </View>
+
+          <Button
+            onPress={this.onPressButton}
+            text="ADD WEIGHT"
+          />
+        </View>
       </View>
     );
   }
@@ -102,7 +99,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginHorizontal: 20,
@@ -110,33 +106,11 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
-    width: '100%'
-  },
-  weightRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     width: '100%',
-    height: 50,
+    marginTop: 20,
   },
-  weightValue: {
-    fontWeight: 'bold',
-  },
-  weightDate: {
-    fontWeight: 'bold',
+  mainView: {
     flex: 1,
-    textAlign: 'center'
-  },
-  iconWrapper: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'gray',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  closeIcon: {
-    marginLeft: 15,
+    backgroundColor: '#D7E8FF',
   }
 });
