@@ -10,6 +10,7 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import WeightRow from '../../components/WeightRow'
 import Avatar from '../../components/Avatar'
+import RadioButtons from '../../components/RadioButtons'
 
 export default class WeightScreen extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ export default class WeightScreen extends React.Component {
     this.state = {
       name: '',
       height: '',
-      birthDate: ''
+      birthDate: '',
+      gender: 'male',
     };
   }
 
@@ -38,6 +40,11 @@ export default class WeightScreen extends React.Component {
       birthDate: value,
     })
   };
+
+  onRadioButtonPress = (value) => () => {
+    console.log("value", value)
+    this.setState({ gender: value })
+  }
 
   onPressButton = () => {
     console.log('name', this.state.name);
@@ -72,6 +79,9 @@ export default class WeightScreen extends React.Component {
             value={this.state.birthDate}
             placeholder="Birth Date"
           />
+
+          <RadioButtons currentValue={this.state.gender} onPress={this.onRadioButtonPress} />
+
           <Button
             onPress={this.onPressButton}
             text="SAVE"
