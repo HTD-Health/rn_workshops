@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     width: '100%',
+    marginVertical: 10,
   },
   label: {
     color: '#0080FF',
