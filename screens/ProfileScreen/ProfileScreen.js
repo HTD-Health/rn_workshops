@@ -1,20 +1,19 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   View,
   FlatList,
   Text,
   TouchableOpacity,
-} from 'react-native';
-
+} from 'react-native'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import WeightRow from '../../components/WeightRow'
+import Avatar from '../../components/Avatar'
 
 export default class WeightScreen extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       name: '',
       height: '',
@@ -50,6 +49,9 @@ export default class WeightScreen extends React.Component {
     return (
       <View style={styles.mainView}>
         <View style={styles.container}>
+
+          <Avatar />
+
           <Input
             onChangeText={this.onChangeName}
             label="Name"
