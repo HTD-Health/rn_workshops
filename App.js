@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import Input from './components/Input'
+
 export default class App extends React.Component {
   constructor(props){
     super(props);
@@ -31,15 +33,13 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text style={{fontSize: 30}}>{this.state.BMI}</Text>
 
-        <View style={styles.inputWrapper}>
-          <Text style={styles.label}>BMI</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={this.onChangeBMI}
-            value={this.state.BMI}
-            keyboardType="numeric"
-          />
-        </View>
+        <Input
+          onChangeText={this.onChangeBMI}
+          label="BMI"
+          keyboardType="numeric"
+          value={this.state.BMI}
+          placeholder="Placeholder"
+        />
 
         <View style={styles.buttonWrapper}>
           <TouchableOpacity
