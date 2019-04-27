@@ -43,18 +43,24 @@ export default class WeightScreen extends React.Component {
       <View style={styles.mainView}>
         <View style={styles.container}>
           <Input
-            onChangeText={this.onChangeWeight}
-            label="Weight"
-            keyboardType="numeric"
-            value={this.state.weight}
-            placeholder="Placeholder"
+            onChangeText={this.onChangeName}
+            label="Name"
+            value={this.state.name}
+            placeholder="Name"
           />
           <Input
-            onChangeText={this.onChangeDate}
-            label="Date"
+            onChangeText={this.onChangeHeight}
+            label="Height"
             keyboardType="numeric"
-            value={this.state.date}
-            placeholder="Placeholder"
+            value={this.state.height}
+            placeholder="Height"
+          />
+          <Input
+            onChangeText={this.onChangeBirthDate}
+            label="Birth Date"
+            keyboardType="numeric"
+            value={this.state.birthDate}
+            placeholder="Birth Date"
           />
           <Button
             onPress={this.onPressButton}

@@ -47,14 +47,14 @@ export default class WeightScreen extends React.Component {
             label="Weight"
             keyboardType="numeric"
             value={this.state.weight}
-            placeholder="Placeholder"
+            placeholder="Weight"
           />
           <Input
             onChangeText={this.onChangeDate}
             label="Date"
             keyboardType="numeric"
             value={this.state.date}
-            placeholder="Placeholder"
+            placeholder="Date"
           />
           <Button
             onPress={this.onPressButton}
