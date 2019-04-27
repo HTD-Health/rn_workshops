@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Input from './components/Input'
+import Button from './components/Button'
 
 export default class App extends React.Component {
   constructor(props){
@@ -41,14 +42,10 @@ export default class App extends React.Component {
           placeholder="Placeholder"
         />
 
-        <View style={styles.buttonWrapper}>
-          <TouchableOpacity
-            onPress={this.onPressButton}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>ADD WEIGHT</Text>
-          </TouchableOpacity>
-        </View>
+        <Button
+          onPress={this.onPressButton}
+          text="ADD WEIGHT"
+        />
 
       </View>
     );
@@ -63,33 +60,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 20,
   },
-  input: {
-    width: '100%',
-    borderBottomWidth: 3,
-    borderColor: '#0080FF',
-    height: 40,
-    borderRadius: 3,
-    fontWeight: 'bold',
-  },
-  inputWrapper: {
-    width: '100%',
-  },
-  buttonWrapper: {
-    width: '100%',
-    marginTop: 20,
-  },
-  label: {
-    color: '#0080FF',
-    fontWeight: 'bold',
-  },
-  button: {
-    backgroundColor: '#0080FF',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 40
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-  }
 });
