@@ -16,26 +16,34 @@ export default class WeightScreen extends React.Component {
     super(props);
 
     this.state = {
-      weight: '90',
-      date: '01.04.2019'
+      name: '',
+      height: '',
+      birthDate: ''
     };
   }
 
-  onChangeWeight = (value) => {
+  onChangeName = (value) => {
     this.setState({
-      weight: value,
+      name: value,
     })
   };
 
-  onChangeDate = (value) => {
+  onChangeHeight = (value) => {
     this.setState({
-      date: value,
+      height: value,
+    })
+  };
+
+  onChangeBirthDate = (value) => {
+    this.setState({
+      birthDate: value,
     })
   };
 
   onPressButton = () => {
-    console.log(this.state.weight);
-    console.log(this.state.date);
+    console.log('name', this.state.name);
+    console.log('height', this.state.height);
+    console.log('birthDate', this.state.birthDate);
   };
 
   render() {
