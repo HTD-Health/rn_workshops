@@ -1,10 +1,10 @@
 import React from "react";
-import { StyleSheet, View, FlatList, AsyncStorage, Dimensions } from "react-native";
-import { LineChart } from "react-native-chart-kit"
+import { StyleSheet, View, FlatList, AsyncStorage, Dimensions, ScrollView } from "react-native";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import WeightRow from "../../components/WeightRow";
+import { WeightChart } from "../../components/WeightChart";
 
 export default class WeightScreen extends React.Component {
   constructor(props) {
@@ -84,45 +84,30 @@ export default class WeightScreen extends React.Component {
   };
 
   render() {
-    const deviceWidth = Dimensions.get("window").width
     return (
       <View style={styles.mainView}>
-        <View style={styles.container}>
-          <LineChart
-            data={{
-              labels: [1, 2, 3],
-              datasets: [{
-                data: [6, 5, 4],
-              }]
-            }}
-            chartConfig={{
-              color: () => '#0080FF',
-              backgroundGradientFrom: '#FFF',
-              backgroundGradientTo: '#FFF',
-              strokeWidth: "0"
-            }}
-            height={200}
-            width={deviceWidth}
-            withShadow={false}
-          />
-          <Input
-            onChangeText={this.onChangeBMI}
-            label="BMI"
-            keyboardType="numeric"
-            value={this.state.BMI}
-            placeholder="Placeholder"
-          />
-
-          <View style={styles.listContainer}>
-            <FlatList
-              data={this.state.weights}
-              renderItem={this.renderItem}
-              keyExtractor={this.keyExtractor}
+        <ScrollView>
+          <View style={styles.container}>
+            <WeightChart data={this.state.weights} />
+            <Input
+              onChangeText={this.onChangeBMI}
+              label="BMI"
+              keyboardType="numeric"
+              value={this.state.BMI}
+              placeholder="Placeholder"
             />
-          </View>
 
-          <Button onPress={this.onPressButton} text="ADD WEIGHT" />
-        </View>
+            <View style={styles.listContainer}>
+              <FlatList
+                data={this.state.weights}
+                renderItem={this.renderItem}
+                keyExtractor={this.keyExtractor}
+              />
+            </View>
+
+            <Button onPress={this.onPressButton} text="ADD WEIGHT" />
+          </View>
+        </ScrollView>
       </View>
     );
   }
