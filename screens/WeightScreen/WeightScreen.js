@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, FlatList, AsyncStorage } from "react-native";
+import { StyleSheet, View, FlatList, AsyncStorage, Dimensions } from "react-native";
+import { LineChart } from "react-native-chart-kit"
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -83,9 +84,27 @@ export default class WeightScreen extends React.Component {
   };
 
   render() {
+    const deviceWidth = Dimensions.get("window").width
     return (
       <View style={styles.mainView}>
         <View style={styles.container}>
+          <LineChart
+            data={{
+              labels: [1, 2, 3],
+              datasets: [{
+                data: [6, 5, 4],
+              }]
+            }}
+            chartConfig={{
+              color: () => '#0080FF',
+              backgroundGradientFrom: '#FFF',
+              backgroundGradientTo: '#FFF',
+              strokeWidth: "0"
+            }}
+            height={200}
+            width={deviceWidth}
+            withShadow={false}
+          />
           <Input
             onChangeText={this.onChangeBMI}
             label="BMI"
