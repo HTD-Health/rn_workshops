@@ -16,13 +16,10 @@ export default class AddWeightScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      weight: "90",
-      date: new Date(),
-    };
+    this.state = this.getDate(props);
   }
 
-  static getDerivedStateFromProps(props) {
+  getDate = props => {
     const { state } = props.navigation;
     if (state && state.params) {
       return {
@@ -35,8 +32,11 @@ export default class AddWeightScreen extends React.Component {
         ),
       };
     }
-    return null;
-  }
+    return {
+      weight: "90",
+      date: new Date(),
+    };
+  };
 
   handleOpenDatePicker = () => {
     DatePickerAndroid.open({

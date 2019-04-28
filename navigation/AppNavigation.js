@@ -1,4 +1,7 @@
-import { createStackNavigator } from "react-navigation";
+import {
+  createStackNavigator,
+  createBottomTabNavigator,
+} from "react-navigation";
 import AddWeightScreen from "../screens/AddWeightScreen/AddWeightScreen";
 import ProductScreen from "../screens/ProductsScreen/ProductsScreen";
 import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
@@ -42,8 +45,25 @@ const ProfileStack = createStackNavigator({
     screen: ProfileScreen,
     navigationOptions: {
       title: "Profil",
+      tabBarLabel: "Profile",
     },
   },
 });
 
-export default ProfileStack;
+ProfileStack.navigationOptions = {
+  tabBarLabel: "Profile",
+};
+
+WeightStack.navigationOptions = {
+  tabBarLabel: "Weight",
+};
+
+ProductsStack.navigationOptions = {
+  tabBarLabel: "Products",
+};
+
+export default createBottomTabNavigator({
+  WeightStack,
+  ProfileStack,
+  ProductsStack,
+});
