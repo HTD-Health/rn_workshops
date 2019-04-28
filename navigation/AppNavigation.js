@@ -23,14 +23,14 @@ const WeightStack = createStackNavigator({
     screen: AddWeightScreen,
     navigationOptions: props => {
       const { state } = props.navigation;
-      if (state && state.params) {
+      if (state && state.params && state.params.adding) {
         return {
-          title: "Edit Weight",
+          title: "Add Weight",
         };
       }
 
       return {
-        title: "Add Weight",
+        title: "Edit Weight",
       };
     },
   },

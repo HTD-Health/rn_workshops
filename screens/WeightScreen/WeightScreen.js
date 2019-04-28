@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, AsyncStorage } from "react-native";
 
 import Button from "../../components/Button";
 import Input from "../../components/Input";
@@ -8,22 +8,44 @@ import WeightRow from "../../components/WeightRow";
 export default class WeightScreen extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       BMI: "90",
       weights: [
         {
           id: 1,
           value: "90",
-          date: "12.08.2017",
+          date: new Date(),
         },
         {
           id: 2,
           value: "86",
-          date: "12.08.2016",
+          date: new Date(),
         },
       ],
     };
+  }
+  
+  componentDidMount() {
+    this.loadWeights()
+  }
+
+  loadWeights = async () => {
+    try {
+    let data = await AsyncStorage.getItem('root')
+    data = data ? JSON.parse(data) : []
+    this.setState({
+      weights: data.map((weights) => {
+        weights.date = new Date(weights.date)
+        return weights
+      }),
+    })
+    } catch (err) {
+      console.error('coś poszło nie tak',err)
+    }
+  }
+
+  updateScreenData = () => {
+    this.loadWeights()
   }
 
   onChangeBMI = value => {
@@ -33,7 +55,7 @@ export default class WeightScreen extends React.Component {
   };
 
   onPressButton = () => {
-    this.props.navigation.navigate("AddWeightScreen");
+    this.props.navigation.navigate("AddWeightScreen", { adding: true, update: this.updateScreenData, weights: this.state.weights});
   };
 
   keyExtractor = item => {
@@ -49,10 +71,11 @@ export default class WeightScreen extends React.Component {
   };
 
   renderItem = ({ item }) => {
+    console.log('date', item.date)
     return (
       <WeightRow
         value={item.value}
-        date={item.date}
+        date={item.date.toLocaleDateString()}
         onEdit={() => this.props.navigation.navigate("AddWeightScreen", item)}
         onRemove={() => this.onRemoveItem(item.id)}
       />

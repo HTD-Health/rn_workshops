@@ -6,6 +6,7 @@ import {
   View,
   DatePickerIOS,
   DatePickerAndroid,
+  AsyncStorage,
 } from "react-native";
 
 import Button from "../../components/Button";
@@ -19,17 +20,29 @@ export default class AddWeightScreen extends React.Component {
     this.state = this.getDate(props);
   }
 
+  saveNewWeights =  async (weight, date) => {
+    const weights = this.props.navigation.getParam('weights', [])
+    weights.push({
+      id: new Date().valueOf(),
+      value: weight,
+      date,
+    })
+    const stringifiedWeights = JSON.stringify(weights)
+    try {
+      await AsyncStorage.setItem('root', stringifiedWeights)
+      const updateWeightScreenFunction = this.props.navigation.getParam('update', () => {})
+      updateWeightScreenFunction()
+    } catch(err) {
+      console.error('err', err)
+    }
+  }
+
   getDate = props => {
     const { state } = props.navigation;
     if (state && state.params) {
       return {
-        weight: state.params.value,
-        date: new Date(
-          state.params.date
-            .split(".")
-            .reverse()
-            .join("-")
-        ),
+        weight: state.params.value || '90',
+        date: state.params.date || new Date(),
       };
     }
     return {
@@ -62,8 +75,9 @@ export default class AddWeightScreen extends React.Component {
   };
 
   onPressButton = () => {
-    console.log(this.state.weight);
-    console.log(this.state.date);
+    const { weight, date } = this.state
+    this.saveNewWeights(weight, date)
+    this.props.navigation.goBack()
   };
 
   render() {
