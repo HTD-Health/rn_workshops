@@ -1,3 +1,5 @@
+import React from "react";
+import { Platform } from "react-native";
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -6,6 +8,9 @@ import AddWeightScreen from "../screens/AddWeightScreen/AddWeightScreen";
 import ProductScreen from "../screens/ProductsScreen/ProductsScreen";
 import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
 import WeightScreen from "../screens/WeightScreen/WeightScreen";
+import { Ionicons } from "@expo/vector-icons";
+
+const getPlatformIcon = Platform.OS === "ios" ? "ios-" : "md-";
 
 const WeightStack = createStackNavigator({
   WeightScreen: {
@@ -52,14 +57,35 @@ const ProfileStack = createStackNavigator({
 
 ProfileStack.navigationOptions = {
   tabBarLabel: "Profile",
+  tabBarIcon: ({ focused }) => (
+    <Ionicons
+      color={focused ? "lightblue" : "lightgrey"}
+      size={25}
+      name={getPlatformIcon + "person"}
+    />
+  ),
 };
 
 WeightStack.navigationOptions = {
   tabBarLabel: "Weight",
+  tabBarIcon: ({ focused }) => (
+    <Ionicons
+      color={focused ? "lightblue" : "lightgrey"}
+      size={25}
+      name={getPlatformIcon + "menu"}
+    />
+  ),
 };
 
 ProductsStack.navigationOptions = {
   tabBarLabel: "Products",
+  tabBarIcon: ({ focused }) => (
+    <Ionicons
+      color={focused ? "lightblue" : "lightgrey"}
+      size={25}
+      name={getPlatformIcon + "images"}
+    />
+  ),
 };
 
 export default createBottomTabNavigator({
