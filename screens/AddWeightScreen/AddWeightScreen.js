@@ -22,6 +22,22 @@ export default class AddWeightScreen extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(props) {
+    const { state } = props.navigation;
+    if (state && state.params) {
+      return {
+        weight: state.params.value,
+        date: new Date(
+          state.params.date
+            .split(".")
+            .reverse()
+            .join("-")
+        ),
+      };
+    }
+    return null;
+  }
+
   handleOpenDatePicker = () => {
     DatePickerAndroid.open({
       date: this.state.date,

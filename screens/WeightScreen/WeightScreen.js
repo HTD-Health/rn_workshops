@@ -33,7 +33,7 @@ export default class WeightScreen extends React.Component {
   };
 
   onPressButton = () => {
-    this.props.navigation.navigate("AddWeightScreen", { test: "testValuw" });
+    this.props.navigation.navigate("AddWeightScreen");
   };
 
   keyExtractor = item => {
@@ -53,7 +53,7 @@ export default class WeightScreen extends React.Component {
       <WeightRow
         value={item.value}
         date={item.date}
-        onEdit={() => this.props.navigation.navigate("AddWeightScreen")}
+        onEdit={() => this.props.navigation.navigate("AddWeightScreen", item)}
         onRemove={() => this.onRemoveItem(item.id)}
       />
     );

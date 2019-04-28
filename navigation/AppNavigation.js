@@ -1,6 +1,7 @@
 import { createStackNavigator } from "react-navigation";
 import AddWeightScreen from "../screens/AddWeightScreen/AddWeightScreen";
 import ProductScreen from "../screens/ProductsScreen/ProductsScreen";
+import ProfileScreen from "../screens/ProfileScreen/ProfileScreen";
 import WeightScreen from "../screens/WeightScreen/WeightScreen";
 
 const WeightStack = createStackNavigator({
@@ -12,8 +13,17 @@ const WeightStack = createStackNavigator({
   },
   AddWeightScreen: {
     screen: AddWeightScreen,
-    navigationOptions: {
-      title: "Add Weight",
+    navigationOptions: props => {
+      const { state } = props.navigation;
+      if (state && state.params) {
+        return {
+          title: "Edit Weight",
+        };
+      }
+
+      return {
+        title: "Add Weight",
+      };
     },
   },
 });
@@ -27,4 +37,13 @@ const ProductsStack = createStackNavigator({
   },
 });
 
-export default WeightStack;
+const ProfileStack = createStackNavigator({
+  WeightScreen: {
+    screen: ProfileScreen,
+    navigationOptions: {
+      title: "Profil",
+    },
+  },
+});
+
+export default ProfileStack;

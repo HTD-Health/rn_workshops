@@ -1,62 +1,54 @@
-import React from 'react'
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  Text,
-  TouchableOpacity,
-} from 'react-native'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-import WeightRow from '../../components/WeightRow'
-import Avatar from '../../components/Avatar'
-import RadioButtons from '../../components/RadioButtons'
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Avatar from "../../components/Avatar";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
+import RadioButtons from "../../components/RadioButtons";
 
-export default class WeightScreen extends React.Component {
+export default class ProfileScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      height: '',
-      birthDate: '',
-      gender: 'male',
+      name: "",
+      height: "",
+      birthDate: "",
+      gender: "male",
     };
   }
 
-  onChangeName = (value) => {
+  onChangeName = value => {
     this.setState({
       name: value,
-    })
+    });
   };
 
-  onChangeHeight = (value) => {
+  onChangeHeight = value => {
     this.setState({
       height: value,
-    })
+    });
   };
 
-  onChangeBirthDate = (value) => {
+  onChangeBirthDate = value => {
     this.setState({
       birthDate: value,
-    })
+    });
   };
 
-  onRadioButtonPress = (value) => () => {
-    console.log("value", value)
-    this.setState({ gender: value })
-  }
+  onRadioButtonPress = value => () => {
+    console.log("value", value);
+    this.setState({ gender: value });
+  };
 
   onPressButton = () => {
-    console.log('name', this.state.name);
-    console.log('height', this.state.height);
-    console.log('birthDate', this.state.birthDate);
+    console.log("name", this.state.name);
+    console.log("height", this.state.height);
+    console.log("birthDate", this.state.birthDate);
   };
 
   render() {
     return (
       <View style={styles.mainView}>
         <View style={styles.container}>
-
           <Avatar />
 
           <Input
@@ -80,12 +72,12 @@ export default class WeightScreen extends React.Component {
             placeholder="Birth Date"
           />
 
-          <RadioButtons currentValue={this.state.gender} onPress={this.onRadioButtonPress} />
-
-          <Button
-            onPress={this.onPressButton}
-            text="SAVE"
+          <RadioButtons
+            currentValue={this.state.gender}
+            onPress={this.onRadioButtonPress}
           />
+
+          <Button onPress={this.onPressButton} text="SAVE" />
         </View>
       </View>
     );
@@ -95,17 +87,17 @@ export default class WeightScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 20,
-    marginVertical: 40
+    marginVertical: 40,
   },
   listContainer: {
     flex: 1,
-    width: '100%',
+    width: "100%",
     marginTop: 20,
   },
   mainView: {
     flex: 1,
-    backgroundColor: '#D7E8FF',
-  }
+    backgroundColor: "#D7E8FF",
+  },
 });
