@@ -1,12 +1,4 @@
-import React from 'react';
-import WeightScreen from './screens/WeightScreen/WeightScreen';
-import AddWeightScreen from './screens/AddWeightScreen/AddWeightScreen';
-import ProfileScreen from './screens/ProfileScreen/ProfileScreen';
+import { createAppContainer } from "react-navigation";
+import WeightStack from "./navigation/AppNavigation";
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <AddWeightScreen />
-    )
-  }
-}
+export default createAppContainer(WeightStack);
